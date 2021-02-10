@@ -59,18 +59,32 @@ module.exports = {
   
     // To find all passengers ( below age 18,above age 18 )for given flight id
   
-  getPassAgeDetails(flight_id, callback) {
-    pool.query(
-      `CALL passengers_above_below_18(?)`,
-      [flight_id],
-      (err, result) => {
-        if (err) {
-          return callback(err);
-        } else {
-          return callback(null, result[0]);
+    getPassAboveAgeDetails(flight_id, callback) {
+      pool.query(
+        `CALL passengers_above_18(?)`,
+        [flight_id],
+        (err, result) => {
+          if (err) {
+            return callback(err);
+          } else {
+            return callback(null, result[0]);
+          }
         }
-      }
-    );
+      );
+      },
+    
+      getPassBelowAgeDetails(flight_id, callback) {
+        pool.query(
+          `CALL passengers_below_18(?)`,
+          [flight_id],
+          (err, result) => {
+            if (err) {
+              return callback(err);
+            } else {
+              return callback(null, result[0]);
+            }
+          }
+        );
     },
   
      // To number of passengers travelling to a given destination and date range

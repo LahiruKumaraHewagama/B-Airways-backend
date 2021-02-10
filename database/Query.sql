@@ -20,16 +20,31 @@ DELIMITER ;
 -- To find all passengers ( below age 18,above age 18 )for given flight id
 
 DELIMITER $$
-  CREATE PROCEDURE passengers_above_below_18(flight_id varchar(30))
+  CREATE PROCEDURE passengers_below_18(flight_id varchar(30))
   
     BEGIN
     
         SELECT * ,(YEAR(CURDATE())-YEAR(u.birthday)) as age FROM  
-        user u natural join booking b where b.flight_id=flight_id ;
+        user u natural join booking b left join profile using(user_id)  where b.flight_id=flight_id and (YEAR(CURDATE())-YEAR(u.birthday))<18;
         
     END$$
 DELIMITER ;
 
+-----------------------------------------------------------------
+DELIMITER $$
+  CREATE PROCEDURE passengers_above_18(flight_id varchar(30))
+  
+    BEGIN
+    
+        SELECT * ,(YEAR(CURDATE())-YEAR(u.birthday)) as age FROM  
+        user u natural join booking b left join profile using(user_id)  where b.flight_id=flight_id and (YEAR(CURDATE())-YEAR(u.birthday)) >=18;
+        
+    END$$
+DELIMITER ;
+
+-- indexing for booking table
+
+CREATE  INDEX booking_flight ON booking (flight_id); 
 --------------------------------------------------
 
 DELIMITER $$
