@@ -24,7 +24,7 @@ module.exports = {
             reject(err);
           } else {
             pool.query(
-              `SELECT SEAT_ID,CLASS_NAME FROM SEAT_INFO NATURAL JOIN TRAVEL_CLASS WHERE AIRCRAFT_ID=? ORDER BY SEAT_ID;SELECT SEAT_ID FROM BOOKING WHERE FLIGHT_ID=? `,
+              `SELECT SEAT_ID,CLASS_NAME FROM seat_info NATURAL JOIN travel_class WHERE AIRCRAFT_ID=? ORDER BY SEAT_ID;SELECT SEAT_ID FROM booking WHERE FLIGHT_ID=? `,
               [result[0].aircraft_id, flight_id],
               (err, results) => {
                 if (err) {

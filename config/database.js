@@ -8,8 +8,7 @@ const pool = createPool({
     password: process.env.DB_PASS,
     database: process.env.MYSQL_DB,
     connectionLimit:10,
-    multipleStatements: true,
-    ssl: true //false for Azure database
+    multipleStatements: true
 })
 
 
