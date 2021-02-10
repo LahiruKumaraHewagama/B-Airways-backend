@@ -9,7 +9,7 @@ const pool = createPool({
     database: process.env.MYSQL_DB,
     connectionLimit:10,
     multipleStatements: true,
-    ssl: true //false for Azure database
+    //ssl: true //false for Azure database
 })
 
 
