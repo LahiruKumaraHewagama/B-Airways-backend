@@ -19,8 +19,8 @@ module.exports = {
           return callBack(err);
         } else {
           pool.query(
-            "insert into profile (user_id ,user_photo,password) values (?,?,?)",
-            [result.insertId, data.user_photo, data.password],
+            "insert into profile (user_id ,user_photo,password,package_name) values (?,?,?,?)",
+            [result.insertId, data.user_photo, data.password, "Basic"],
             (err, result) => {
               if (err) {
                 return callBack(err);
@@ -42,6 +42,7 @@ module.exports = {
           if (err) {
             reject(err);
           }
+          console.log(result);
           resolve(result[0]);
         }
       );

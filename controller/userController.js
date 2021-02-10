@@ -39,6 +39,7 @@ module.exports = {
     let userDetailsinDatabase;
     try {
       userDetailsinDatabase = await getRegistedUserByEmail(body.email);
+      console.log(userDetailsinDatabase);
       if (userDetailsinDatabase) {
         const result = compareSync(
           body.password,

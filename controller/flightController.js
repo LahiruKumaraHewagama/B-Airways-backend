@@ -47,7 +47,6 @@ module.exports = {
     const default_price =
       result.aircraft_charge + result.route_charge + result.travel_class_charge;
     var discount_price = default_price;
-
     if (req.user) {
       const {
         user_id,
