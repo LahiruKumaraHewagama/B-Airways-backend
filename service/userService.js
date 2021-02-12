@@ -63,4 +63,31 @@ module.exports = {
       );
     });
   },
+
+  editUserProfile:(data,id,callback)=>{
+    pool.query(
+      `update user set name=?,email=?,birthday=?,contact_no=?,passport_no=?,country=? where user_id=?`,
+      [data.name,data.email,data.birthday,data.contact_no,data.passport_no,data.country,id],
+      (err, result) => {
+        if (err) {
+          return callback(err);
+        } else {
+          return callback(null);
+        }
+      }
+    );
+  },
+  updatePassword:(userId,newpassword,calllback)=>{
+    pool.query(
+      `update profile set password=? where user_id=?`,
+      [newpassword,userId],
+      (err, result) => {
+        if (err) {
+          return calllback(err);
+        } else {
+          return calllback(null);
+        }
+      }
+    );
+  }
 };
